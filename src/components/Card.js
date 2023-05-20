@@ -1,7 +1,6 @@
 function Card(card) {
   function handleClick() {
-    card.onCardClick(card);
-    console.log(card);
+    card.onCardClick(card)
   }
   return (
     <div className="elements__element">

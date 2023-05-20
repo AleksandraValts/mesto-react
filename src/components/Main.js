@@ -19,14 +19,14 @@ function Main(props) {
         about: data.about,
         avatar: data.avatar});
       })
-      .catch((err) => {console.log(err)});
-    })
+      .catch((err) => {console.log(err)})
+    }, [])
 
   React.useEffect(() => {
     apiData
       .getInitialCards()
       .then((data) => {setCards(data)})
-      .catch((err) => {console.log(err)});
+      .catch((err) => {console.log(err)})
   }, []);
   
   return (
@@ -50,7 +50,6 @@ function Main(props) {
           </section>
           <section className="elements">
           {cards.map((card) => (
-           // console.log(card),
             <Card key={card._id} {...card} onCardClick={props.onCardClick} />
           ))}         
           </section>

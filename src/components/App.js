@@ -6,6 +6,11 @@ import ImagePopup from './ImagePopup.js';
 import PopupWithForm from './PopupWithForm.js';
 
 function App() {
+  const [isEditProfilePopupOpen, setProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+
   function handleEditProfileClick() {
   //  const profilePopup = document.querySelector('.popup_type_profile');
   //  profilePopup.classList.add('popup_opened');
@@ -23,11 +28,6 @@ function App() {
   //  avatarPopup.classList.add('popup_opened');
     setAvatarPopupOpen(true);
   }
-
-  const [isEditProfilePopupOpen, setProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(null);
   
   function closeAllPopups() {
     setProfilePopupOpen(false);
@@ -52,8 +52,7 @@ function App() {
         <Footer />
         <PopupWithForm 
             isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
-            title={"Редактировать профиль"} buttonSave={"Сохранить"}
-            name={"type_profile"} form={"form_profile"}>
+            title={"Редактировать профиль"} form={"form_profile"}>
             <input
                 className="popup__input popup__input_type_name" required
                 type="text" name="name" id="input-name"
@@ -67,8 +66,7 @@ function App() {
         </PopupWithForm>
         <PopupWithForm 
             isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}
-            title={"Новое место"} buttonSave={"Создать"}
-            name={"type_places"} form={"form_places"}>
+            title={"Новое место"} buttonSave={"Создать"} form={"form_places"}>
             <input
                 className="popup__input popup__input_type_place" required
                 type="text" name="place" id="input-place"
@@ -82,8 +80,7 @@ function App() {
         </PopupWithForm>
         <PopupWithForm 
             isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
-            title={"Обновить аватар"} buttonSave={"Обновить"}
-            name={"type_avatar"} form={"form_avatar"} container={"avatar"}>
+            title={"Обновить аватар"} form={"form_avatar"} container={"avatar"}>
             <input
                 className="popup__input popup__input_type_avatar" required
                 type="url" name="avatar" id="input-avatar"
@@ -95,8 +92,7 @@ function App() {
             onClose={closeAllPopups}/>
         <PopupWithForm 
             onClose={closeAllPopups}
-            title={"Вы уверены?"} buttonSave={"Да!"}
-            name={"type_delete"} container={"delete"}>
+            title={"Вы уверены?"} buttonSave={"Да!"} container={"delete"}>
         </PopupWithForm>
     </div>
   );
