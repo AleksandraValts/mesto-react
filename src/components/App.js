@@ -18,16 +18,11 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    apiData
-      .getUserInfo()
-      .then((data) => {setCurrentUser(data)})
-      .catch((err) => {console.log(err)})
-    }, [])
-
-  React.useEffect(() => {
-    apiData
-      .getInitialCards()
-      .then((data) => {setCards(data)})
+    Promise.all([apiData.getUserInfo(), apiData.getInitialCards()])
+      .then(([user, data]) => {
+        setCurrentUser(user);
+        setCards(data)
+      })
       .catch((err) => {console.log(err)})
   }, []);
 
@@ -48,13 +43,15 @@ function App() {
         .catch((err) => {console.log(err)});
     }
   }
-  
+
   function handleCardDelete(card) {
     apiData.deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter(c => c._id !== card._id))
+      .then((newCard) => {
+        const dataCards = cards.filter((c) =>
+        c._id === card._id ? '' : newCard);
+        setCards(dataCards)
       })
-      .catch((err) => {console.log(err)})
+      .catch((err) => {console.log(err)});
   }
 
   function handleEditProfileClick() {
