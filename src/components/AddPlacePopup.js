@@ -1,16 +1,9 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function AddPlacePopup(props) {
-
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
-
-  React.useEffect(() => {
-    setName('');
-    setLink('');
-  }, [props.isOpen])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,6 +17,10 @@ function AddPlacePopup(props) {
   function handleChangeCardLink(e) {
     setLink(e.target.value)
   }
+
+  React.useEffect(() => {
+    setName('');
+    setLink('')}, [props.isOpen])
 
   return (
     <PopupWithForm onSubmit={handleSubmit}
